@@ -1,0 +1,20 @@
+{
+  "version": "1.1",
+  "release_date": "2026-04-30",
+  "changelog": [
+    "Initial release",
+    "Photo Story system",
+    "Ad Manager system",
+    "GitHub Updater system"
+  ],
+  "min_wp": "6.0",
+  "min_php": "7.4",
+  "files": {
+    "theme": "https://raw.githubusercontent.com/mohitkachhwaha/fraud-alert-theme/main/child-theme.zip",
+    "mu_plugins": "https://raw.githubusercontent.com/mohitkachhwaha/fraud-alert-theme/main/mu-plugins.zip"
+  },
+  "checksums": {
+    "theme": "GENERATE_SCRIPT_SE_AAYEGA",
+    "mu_plugins": "GENERATE_SCRIPT_SE_AAYEGA"
+  }
+}
