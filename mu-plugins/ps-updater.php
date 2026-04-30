@@ -562,7 +562,7 @@ class PSUpdater {
         $new_ver   = $this->sanitize_version($data['version'] ?? '');
 
         // Phase 1: Download + verify all files before touching anything
-        foreach (['theme', 'mu_plugins'] as $key) {
+        foreach (['parent_theme', 'child_theme', 'mu_plugins'] as $key) {
             $url = $data['files'][$key] ?? '';
             if (!$url) continue;
 
@@ -595,7 +595,11 @@ class PSUpdater {
         // Fix 3: partial update prevention
         if ($success) {
             foreach ($tmps as $key => $tmp) {
-                $dest     = $key === 'mu_plugins' ? WPMU_PLUGIN_DIR : WP_CONTENT_DIR . '/themes';
+                $dest = WP_CONTENT_DIR . '/themes';
+                if ($key === 'mu_plugins') {
+                    $dest = WPMU_PLUGIN_DIR;
+                }
+                
                 $unzipped = unzip_file($tmp, $dest);
                 unlink($tmp);
                 if (is_wp_error($unzipped)) { $success = false; break; }
@@ -696,6 +700,7 @@ class PSUpdater {
         $backup_file = PS_BACKUP_DIR . 'backup_v' . $this->sanitize_version(PS_CURRENT_VERSION) . '_' . time() . '.zip';
         if ($zip->open($backup_file, ZipArchive::CREATE) !== TRUE) return false;
 
+        $this->add_folder_to_zip(WP_CONTENT_DIR . '/themes/fraudalert-theme', $zip, 'themes/fraudalert-theme');
         $this->add_folder_to_zip(WP_CONTENT_DIR . '/themes/fraudalert-theme-child', $zip, 'themes/fraudalert-theme-child');
         $this->add_folder_to_zip(WPMU_PLUGIN_DIR, $zip, 'mu-plugins');
         $zip->close();
