@@ -1,0 +1,252 @@
+/*
+Theme Name: FraudAlert India Child
+Theme URI: https://fraudalertindia.com
+Description: Child theme for FraudAlert India. Place all customizations here to preserve parent theme updates.
+Author: FraudAlert India
+Author URI: https://fraudalertindia.com
+Template: fraudalert-theme
+Version: 1.1
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 8.0
+License: Proprietary
+Text Domain: fraudalert-child
+*/
+
+/* Child theme overrides below */
+
+/* Social Share Buttons */
+.fa-share-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 2rem 0;
+    align-items: center;
+}
+
+.fa-share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.fa-share-btn:hover {
+    background: var(--navy);
+    border-color: var(--navy);
+}
+
+.fa-share-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--navy);
+    transition: fill 0.2s ease;
+}
+
+.fa-share-btn:hover svg {
+    fill: var(--white);
+}
+
+.fa-share-copy {
+    width: auto;
+    border-radius: 20px;
+    padding: 0 1rem;
+    gap: 0.5rem;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+}
+
+.fa-share-copy svg {
+    fill: var(--white);
+}
+
+.fa-share-copy .btn-label {
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--fu);
+}
+
+/* WhatsApp Join Button */
+.fa-whatsapp-join-wrap {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.fa-whatsapp-join-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background: #25D366;
+    color: #fff !important;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-family: var(--fh);
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.fa-whatsapp-join-btn:hover {
+    background: #128C7E;
+    transform: translateY(-2px);
+}
+
+.fa-whatsapp-join-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+}
+
+
+/* Professional Wide Layout Fix */
+:root {
+    --max-width: 1200px; /* Increased for a premium wide look */
+}
+
+/* Restoring Airy Layout */
+.single-layout {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+    gap: 4rem !important; /* Adding more space between content and sidebar */
+}
+
+/* Enhancing Trust Center View */
+.trust-resource-center {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Premium soft shadow */
+    border: 1px solid rgba(0, 52, 89, 0.1) !important;
+    background: #ffffff !important;
+}
+
+/* Polish for Scam Alert Shortcode */
+.scam-alert-box {
+    border-left: 5px solid #dc3545 !important;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.08);
+    font-size: 16px !important;
+    line-height: 1.6;
+}
+
+/* Improving Typography Breathing Room */
+.post-header .post-title {
+    font-size: 38px !important;
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem !important;
+}
+
+.post-content p {
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 17px;
+}
+
+/* Custom Author Card Redesign */
+.fa-custom-author-card {
+    display: flex !important;
+    gap: 1.5rem;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 3rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.fa-author-avatar {
+    flex-shrink: 0;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--off);
+    display: block !important;
+}
+
+.fa-author-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fa-author-details {
+    flex: 1;
+}
+
+.fa-author-name {
+    display: block !important;
+    font-family: var(--fh);
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--navy) !important;
+    text-decoration: none !important;
+    margin-bottom: 0.25rem;
+}
+
+.fa-author-bio {
+    font-family: var(--fu);
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.fa-author-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.fa-author-socials a {
+    text-decoration: none !important;
+    font-size: 18px;
+    opacity: 0.6;
+    transition: 0.2s;
+}
+
+.fa-author-socials a:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+/* Mobile Responsive adjustment */
+@media (max-width: 600px) {
+    .fa-custom-author-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .fa-author-details {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .fa-author-socials {
+        justify-content: center;
+    }
+}
+
+/* Hide Mobile-Only CTA on Desktop/Tablet */
+@media (min-width: 901px) {
+    .report-cta--mobile-only {
+        display: none !important;
+    }
+}
+
+/* Custom Ad Images Optimization */
+.fa-ad-top img, .fa-ad-inline img, .fa-ad-bottom img, #fa-sticky-anchor img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}

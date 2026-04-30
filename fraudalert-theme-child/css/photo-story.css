@@ -1,0 +1,451 @@
+/*========================================================================
+ * Photo Story CSS
+ * Theme: fraudalert-theme-child
+ * File: css/photo-story.css
+ *========================================================================*/
+
+/*--------------------------------------------------------------
+# Base Variables
+--------------------------------------------------------------*/
+:root {
+    --saf: #E85D04;
+    --saf2: #F48C06;
+    --saf3: #FFBA08;
+    --navy: #003459;
+    --nav2: #00527a;
+    --nav3: #0077B6;
+    --green: #2D6A4F;
+    --grn2: #40916C;
+    --red: #C1121F;
+    --red2: #E63946;
+    --white: #FFFFFF;
+    --off: #FFF8F0;
+    --cream: #FEF3E2;
+    --text: #1A1A1A;
+    --muted: #666677;
+    --border: #E8DDD0;
+    --light: #F5EFE6;
+    --fh: 'Baloo 2', cursive;
+    --fb: 'Mukta', sans-serif;
+    --fu: 'Noto Sans', sans-serif;
+    --shadow: 0 4px 24px rgba(0,52,89,0.10);
+    --shadow-lg: 0 8px 40px rgba(0,52,89,0.16);
+}
+
+/*--------------------------------------------------------------
+# Frontend Layout & Components
+--------------------------------------------------------------*/
+
+/* Page Container — matches .ps-container in single-photo_story.php */
+.ps-container {
+    max-width: 780px;
+    margin: 0 auto;
+    font-family: var(--fb);
+    color: var(--text);
+}
+
+/* Breadcrumbs */
+.ps-breadcrumb {
+    font-family: var(--fu);
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+.ps-breadcrumb a {
+    color: var(--navy);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.ps-breadcrumb a:hover {
+    color: var(--saf);
+}
+
+/* Category Row & Count Badge */
+.ps-cat-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+/* Main Title */
+.ps-title {
+    font-family: var(--fh);
+    font-size: 36px;
+    color: var(--navy);
+    margin: 0 0 16px;
+    line-height: 1.2;
+}
+
+/* Meta Row (Author, Date, Read time) — matches .ps-meta in template */
+.ps-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--fu);
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+/* Read time span — hidden until JS populates it (prevents orphan pipe |) */
+.ps-readtime {
+    display: none;
+}
+
+/* Intro Section */
+.ps-intro {
+    border-left: 4px solid var(--saf);
+    padding: 16px 20px;
+    background-color: var(--cream);
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Top Share Bar */
+.ps-share-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+.ps-share-bar button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 50px; /* Pill shape */
+    cursor: pointer;
+    font-family: var(--fu);
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.ps-share-bar button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Social Share Button Colors */
+.ss-fb { background-color: #1877F2; color: #fff; }
+.ss-tw { background-color: #000000; color: #fff; }
+.ss-wa { background-color: #25D366; color: #fff; }
+.ss-tg { background-color: #229ED9; color: #fff; }
+.ss-cp { background-color: var(--cream); color: var(--navy); border: 1px solid var(--border); }
+
+/* Individual Slide Container — initially hidden for scroll-reveal */
+.ps-slide {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* JS adds .ps-visible via IntersectionObserver */
+.ps-slide.ps-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .ps-slide { opacity: 1; transform: none; transition: none; }
+}
+
+/* Slide Image Wrapper */
+.ps-img-wrap {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--light);
+}
+
+/* Slide Image — fades in when slide or image-wrap becomes visible */
+.ps-slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Feature 3: .ps-slide gets .ps-visible (slide scroll-reveal, threshold:0.5) */
+.ps-slide.ps-visible .ps-slide-img {
+    opacity: 1;
+}
+
+/* Feature 5: .ps-img-wrap gets .ps-visible (image fade, threshold:0.1, rootMargin:50px) */
+.ps-img-wrap.ps-visible .ps-slide-img {
+    opacity: 1;
+}
+
+/* Slide Counter Overlay */
+.ps-slide-counter {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: var(--navy);
+    color: #fff;
+    border-radius: 6px;
+    font-size: 12px;
+    padding: 3px 8px;
+    font-family: var(--fu);
+    font-weight: 600;
+}
+
+/* HD 16:9 Badge Overlay */
+.ps-hd-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: var(--saf);
+    color: #fff;
+    border-radius: 6px;
+    font-size: 11px;
+    padding: 2px 7px;
+    font-family: var(--fu);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* Slide Content Container */
+.ps-slide-content {
+    padding: 20px;
+}
+
+/* Slide Caption Title */
+.ps-caption-title {
+    font-family: var(--fh);
+    font-size: 24px;
+    color: var(--navy);
+    margin: 0 0 12px;
+    line-height: 1.3;
+}
+
+/* Slide Caption Text */
+.ps-caption-text {
+    font-family: var(--fu);
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Slide Level Share Bar */
+.ps-slide-share {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+.ps-slide-share button {
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--fu);
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+.ps-slide-share button:hover {
+    opacity: 0.8;
+}
+
+/* Also Read — subtle editorial inline label (Discover-safe, TOI/HT pattern) */
+.ps-also-read {
+    border-left: 3px solid var(--saf2);
+    background: transparent;
+    padding: 10px 14px;
+    margin: 20px 0;
+}
+.ps-also-read h3 {
+    margin: 0 0 4px;
+    font-family: var(--fu, sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--saf2);
+}
+.ps-also-read a {
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 500;
+    font-family: var(--fb);
+    font-size: 15px;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+}
+.ps-also-read a:hover {
+    color: var(--saf);
+    text-decoration: underline;
+}
+
+/* Tags Container */
+.ps-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    margin-bottom: 40px;
+}
+
+/* Related Stories Grid */
+.ps-related-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+/* Related Story Card — matches .ps-rel-card in template */
+.ps-rel-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--white);
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+}
+.ps-rel-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+.ps-rel-card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+.ps-rel-card-content {
+    padding: 12px;
+}
+.ps-rel-card-title {
+    margin: 0;
+    font-family: var(--fh);
+    font-size: 18px;
+    color: var(--navy);
+    line-height: 1.3;
+}
+
+
+/*--------------------------------------------------------------
+# Admin Meta Box Styles (Photo Story CPT)
+# Class names match render_slides_box() output exactly
+--------------------------------------------------------------*/
+/* Admin: Slides wrap — targets the id attribute in render_slides_box() */
+#ps-slides-wrap {
+    margin-top: 10px;
+}
+/* Each slide row */
+.ps-row {
+    border: 1px solid var(--border);
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    background-color: var(--off);
+}
+/* Thumbnail preview inside row */
+.ps-row .ps-pv img {
+    width: 60px !important;
+    height: 60px !important;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background-color: var(--white);
+}
+/* Add Slide button (targets the element by ID) */
+#ps-add-slide {
+    background-color: var(--saf) !important;
+    color: #fff !important;
+    border: none !important;
+    text-shadow: none !important;
+}
+#ps-add-slide:hover {
+    background-color: var(--saf2) !important;
+}
+/* Remove slide button */
+.ps-rm {
+    background-color: #dc3232 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 2px 8px !important;
+    border-radius: 4px !important;
+}
+.ps-rm:hover {
+    background-color: #b32d2d !important;
+}
+/* Drag handle */
+.ps-row .ps-drag {
+    cursor: grab;
+    margin-right: 10px;
+    color: var(--muted);
+    font-size: 18px;
+    user-select: none;
+}
+.ps-row .ps-drag:active {
+    cursor: grabbing;
+}
+
+
+/*--------------------------------------------------------------
+# Responsive Adjustments
+--------------------------------------------------------------*/
+
+/* Tablet */
+@media (max-width: 900px) {
+    .ps-title {
+        font-size: 30px;
+    }
+    .ps-intro {
+        font-size: 16px;
+    }
+    .ps-related-grid {
+        grid-template-columns: 1fr; /* Single column on tablet to avoid cramped cards */
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .ps-container {
+        max-width: 100%;
+        padding: 0 15px; /* ensure small padding on mobile */
+    }
+    .ps-title {
+        font-size: 26px;
+    }
+    .ps-meta {
+        gap: 12px;
+        font-size: 13px;
+    }
+    .ps-share-bar {
+        gap: 6px;
+    }
+    .ps-share-bar button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    .ps-slide-content {
+        padding: 16px;
+    }
+    .ps-caption-title {
+        font-size: 20px;
+    }
+    .ps-caption-text {
+        font-size: 15px;
+    }
+    .ps-related-grid {
+        grid-template-columns: 1fr; /* Single column */
+    }
+}

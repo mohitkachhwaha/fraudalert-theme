@@ -1,0 +1,126 @@
+/**
+ * Ad Manager Styles
+ * Theme: fraudalert-theme-child
+ */
+
+.ps-ad-wrap {
+    text-align: center;
+    margin: 20px auto;
+    overflow: hidden;
+    clear: both;
+}
+
+.ps-ad-label {
+    display: block;
+    font-size: 10px;
+    color: var(--muted, #666);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+/* Ad Sizes — max-width + margin:auto for centering within text-align:center wrapper */
+.ps-ad-728 { max-width: 728px; margin: 0 auto; }
+.ps-ad-300 { max-width: 300px; margin: 0 auto; }
+.ps-ad-320 { max-width: 320px; margin: 0 auto; }
+.ps-ad-responsive { width: 100%; }
+
+/* Custom Image Ad */
+.ps-ad-img-wrap {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.ps-ad-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity .3s ease;
+}
+
+.ps-ad-img:hover {
+    opacity: .9;
+}
+
+/* Sidebar Ad */
+.ps-ad-sidebar {
+    position: sticky;
+    top: 80px;
+}
+
+/* Footer Sticky Ad */
+.ps-ad-sticky-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: #fff;
+    padding: 8px;
+    box-shadow: 0 -2px 10px rgba(0, 52, 89, 0.15);
+    text-align: center;
+    display: none; /* Controlled by JS */
+}
+
+/* WP Admin Bar offset — admin bar is z-index:99999; sticky at 999 renders fine below it */
+.admin-bar .ps-ad-sticky-footer { bottom: 32px; }
+@media (max-width: 782px) { .admin-bar .ps-ad-sticky-footer { bottom: 46px; } }
+
+.ps-sticky-close {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    background: var(--navy, #003459);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    cursor: pointer;
+    line-height: 24px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Mobile/Desktop Visibility */
+@media (max-width: 768px) {
+    .ps-ad-desktop-only {
+        display: none !important;
+    }
+}
+
+/* Standard min-width syntax — @media not (max-width) is non-standard pre-CSS4 */
+@media (min-width: 769px) {
+    .ps-ad-mobile-only {
+        display: none !important;
+    }
+}
+
+/* Body padding when sticky footer is active — prevents content overlap */
+body.ps-sticky-active {
+    padding-bottom: 70px;
+}
+
+/* Photo Story Between Slides — class auto-added by PSAdRender as ps-ad-slides */
+.ps-ad-slides {
+    margin: 16px 0;
+    border-top: 1px solid var(--border, #eee);
+    border-bottom: 1px solid var(--border, #eee);
+    padding: 12px 0;
+    overflow: hidden; /* Prevent AdSense overflow beyond slide column */
+}
+
+/* Lazy Load Initial State — size-specific min-heights prevent CLS */
+.ps-ad-lazy:not(.ps-ad-loaded) {
+    min-height: 50px;
+    background: var(--light, #f9f9f9);
+}
+.ps-ad-728.ps-ad-lazy:not(.ps-ad-loaded) { min-height: 90px; }
+.ps-ad-300.ps-ad-lazy:not(.ps-ad-loaded) { min-height: 250px; }
+.ps-ad-320.ps-ad-lazy:not(.ps-ad-loaded) { min-height: 50px; }
