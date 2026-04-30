@@ -2,19 +2,19 @@
   "version": "1.1",
   "release_date": "2026-04-30",
   "changelog": [
-    "Initial release",
-    "Photo Story system",
-    "Ad Manager system",
-    "GitHub Updater system"
+    "Added support for Parent Theme updates",
+    "Initial full system release"
   ],
   "min_wp": "6.0",
   "min_php": "7.4",
   "files": {
-    "theme": "https://raw.githubusercontent.com/mohitkachhwaha/fraud-alert-theme/main/child-theme.zip",
+    "parent_theme": "https://raw.githubusercontent.com/mohitkachhwaha/fraud-alert-theme/main/parent-theme.zip",
+    "child_theme": "https://raw.githubusercontent.com/mohitkachhwaha/fraud-alert-theme/main/child-theme.zip",
     "mu_plugins": "https://raw.githubusercontent.com/mohitkachhwaha/fraud-alert-theme/main/mu-plugins.zip"
   },
   "checksums": {
-    "theme": "GENERATE_SCRIPT_SE_AAYEGA",
-    "mu_plugins": "GENERATE_SCRIPT_SE_AAYEGA"
+    "parent_theme": "5523D1EB3BD35541E259088938F75074F457CF65DBAFE58B52D3E83242AE222D",
+    "child_theme": "814EB979C19D16FD429A4465280C1A63DBD7E4B38EBB6315516FA9711FC3C445",
+    "mu_plugins": "68CEF353AA1FD394FE210B2B7CED27C068A9902AD14A83B43A1A9FB9BCEFA777"
   }
 }
